@@ -152,7 +152,7 @@ let teacher4 = new Teacher(314, 'Neithan', [])
 let teacher5 = new Teacher(315, 'Anna', [])
 
 //courses
-let course1 = new Course(211, 'Poo', teacher1, [])
+let course1 = new Course(211, 'Poo', teacher1)
 let course2 = new Course(212, 'Calculus', teacher2, [],)
 let course3 = new Course(213, 'Algebra', teacher1, [],)
 let course4 = new Course(214, 'Literature', teacher1, [],)
