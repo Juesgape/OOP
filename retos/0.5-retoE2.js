@@ -24,7 +24,7 @@ class Student extends Person {
 
             enrolledCourses.forEach(course => {
                 if(!course.totalStudents.includes(this)) {
-                    course.totalStudents.push(this)
+                    course.students = this
                 } 
             })
         }
@@ -37,7 +37,7 @@ class Student extends Person {
     }
     set courses(newCourse) {
         if(this.courses.find(course => course === newCourse)) {
-            console.error('El estudiante ya está matriculado en este curso')
+            console.error(`El estudiante ya está matriculado en el curso ${newCourse.name}` )
             return
         } else {
             this.enrolledCourses.push(newCourse)
@@ -54,7 +54,7 @@ class Student extends Person {
             return
 
         } else {
-            console.error('El estudiante no está matriculado en este curso')
+            console.error(`El estudiante no está matriculado en este curso ${course.name}`)
         }
     }
 }
@@ -72,10 +72,10 @@ class Teacher extends Person {
 
     set addCourse(newCourse) {
         if(this.courses.find(elem => elem === newCourse)) {
-            console.error('El profesor ya tiene asignado este curso')
+            console.error(`El profesor ${this.name} ya tiene asignado el curso de ${newCourse.name}`)
         } else {
-            if(newCourse.teacher !== undefined) {
-                console.error('Ya hay un profesor con el curso asignado');
+            if(newCourse.teacher !== this) {
+                console.error(`Ya hay un profesor con el curso ${newCourse.name} asignado y se llama ${this.name}`);
             } else {
                 this.courses.push(newCourse)
                 newCourse.teacher = this
@@ -89,7 +89,7 @@ class Teacher extends Person {
             course.teacher = undefined
             this.courses = this.courses.filter(c => c !== course) 
         } else {
-            return 'El profesor no tiene asignado este curso'
+            return `El profesor no tiene asignado el curso de ${course.name}` 
         }
     }
 }
@@ -113,18 +113,22 @@ class Course {
             this.totalStudents = totalStudents || [];
             this.teacher = teacher
     
-            if (teacher) return teacher.courses.push(this)
+            if (teacher) return teacher.addCourse = this
 
         } catch(err) {
             console.log(err);
         }
     }
     get students() {
-        return this.totalStudents
+        if(this.totalStudents.length < 0) {
+            return `El curso ${this.name} no tiene estudiantes matriculados`
+        } else {
+            return this.totalStudents
+        }
     }
     set students(student) {
         if(this.totalStudents.find(e => e === student)) {
-            console.error('El estudiante ya está matriculado en este curso')
+            console.error(`El estudiante ${student} ya está matriculado en el curso ${this.name}`)
             return
         } else {
             this.totalStudents.push(student)
@@ -134,7 +138,7 @@ class Course {
     set removeStudent(student) {
         
         if(!this.totalStudents.find(e => e === student)) {
-            console.error('Este estudiante no está matriculado en el curso')
+            console.error(`El estudiante ${student.name} no está matriculado en el de ${this.name}`)
             return
         } else {
             this.totalStudents = this.students.filter(e => e !== student)
@@ -145,23 +149,26 @@ class Course {
 }
 
 //Teachers
-let teacher1 = new Teacher(311, 'Pedro', [])
-let teacher2 = new Teacher(312, 'Matias', [])
-let teacher3 = new Teacher(313, 'Sara', [])
-let teacher4 = new Teacher(314, 'Neithan', [])
-let teacher5 = new Teacher(315, 'Anna', [])
+let teacher1 = new Teacher(311, 'Pedro')
+let teacher2 = new Teacher(312, 'Matias')
+let teacher3 = new Teacher(313, 'Sara')
+let teacher4 = new Teacher(314, 'Neithan')
+let teacher5 = new Teacher(315, 'Anna')
+
 
 //courses
 let course1 = new Course(211, 'Poo', teacher1)
-let course2 = new Course(212, 'Calculus', teacher2, [],)
-let course3 = new Course(213, 'Algebra', teacher1, [],)
-let course4 = new Course(214, 'Literature', teacher1, [],)
-let course5 = new Course(215, 'English', teacher5, [],)
+let course2 = new Course(212, 'Calculus', teacher2, [])
+let course3 = new Course(213, 'Algebra', teacher1, [])
+let course4 = new Course(214, 'Literature', teacher1, [])
+let course5 = new Course(215, 'English', teacher5, [])
 
 
-let e1 = new Student(111, 'Juan', [course2, course4, course2, course2, course2,course2])
-/* let e2 = new Student(112, 'Pepito', [course1, course4, course3, course5])
-console.log(course4.students); */
+
+/* let e1 = new Student(111, 'Juan', [course2, course4, course2, course2, course2,course2]) */
+let e2 = new Student(112, 'Pepito', [course1, course4, course3, course5])
+
+console.log(course1);
 
 /* console.log(course2.students);
 console.log(e1.courses);
