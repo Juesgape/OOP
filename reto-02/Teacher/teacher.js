@@ -39,6 +39,8 @@ class Teacher extends Person {
         try {
             if(!course) {
                 throw new Error('Debes especificar un curso')
+            } else if (!(percentage > 0 && percentage <= 100)) {
+                throw new Error(`El porcentaje ingresado del exámen "${name}" no es váido`)
             } else {
                 const exam = new Exam(name, percentage, course, questions)
 
