@@ -17,6 +17,7 @@ class Course {
             this.name = name
             this.totalStudents = totalStudents || [];
             this.teacher = teacher
+            this.exams = []
     
             if (teacher) return teacher.addCourse = this
 
@@ -49,6 +50,14 @@ class Course {
             this.totalStudents = this.students.filter(e => e !== student)
             student.removeCourse = this
         }
+    }
+
+    get exam() {
+        return this.exams
+    }
+
+    set exam(newExam) {
+        this.exams.push(newExam)
     }
 
 }

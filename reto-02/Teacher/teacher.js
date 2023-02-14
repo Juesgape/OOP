@@ -1,5 +1,6 @@
 //los profesores tienen id, nombre y una lista de cursos que dictan;
 import { Person } from "../Person/person.js"
+import { Exam } from "../Exam/exam.js"
 
 class Teacher extends Person {
     constructor(id, name) {
@@ -32,6 +33,27 @@ class Teacher extends Person {
         } else {
             return `El profesor no tiene asignado el curso de ${course.name}` 
         }
+    }
+
+    setExam(name, percentage, course, questions) {
+        try {
+            if(!course) {
+                throw new Error('Debes especificar un curso')
+            } else {
+                const exam = new Exam(name, percentage, course, questions)
+
+                if(course.teacher === this) {
+                    exam.setQuestions = questions
+                    course.exams = exam
+                } else {
+                    console.error(`El profesor ${this.name} no tiene asignado el curso ${course.name}`)
+                }
+
+            }
+        } catch(err) {
+            console.log(err);
+        }
+
     }
 }
 

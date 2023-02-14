@@ -9,6 +9,7 @@ En esta aplicación se podrán crear cursos, estudiantes y profesores. Adicional
 import { Student } from "./Student/student.js"
 import { Teacher } from "./Teacher/teacher.js"
 import { Course } from "./Course/course.js"
+import { Exam } from "./Exam/exam.js"
 
 //Teachers
 let teacher1 = new Teacher(311, 'Pedro')
@@ -30,7 +31,17 @@ let course5 = new Course(215, 'English', teacher5)
 /* let e1 = new Student(111, 'Juan', [course2, course4, course2, course2, course2,course2]) */
 let e2 = new Student(112, 'Pepito', [course1, course4, course3, course5])
 
-console.log(e2);
+
+teacher5.setExam('To be verb', 30, course5, [{question: '¿To be === estar?', question: 'Hola ha ha'}])
+
+//this should throw an error
+/* teacher5.setExam('Test', 10, course1, [{question: 'blah blah', question: 'he he he'}]) */
+
+//testing the logic of the programm
+
+console.log(course5.exam);
+
+/* console.log(course5.exam); */
 
 /* console.log(course2.students);
 console.log(e1.courses);
