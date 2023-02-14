@@ -1,0 +1,26 @@
+{
+  "name": "opp-udem",
+  "version": "1.0.0",
+  "description": "A repository to upload all of my code related to object oriented programming",
+  "main": "classes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juesgape/OOP.git"
+  },
+  "keywords": [
+    "OOP",
+    "Javascript",
+    "challenges",
+    "programming"
+  ],
+  "author": "Juesgape <juesgape11@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Juesgape/OOP/issues"
+  },
+  "homepage": "https://github.com/Juesgape/OOP#readme",
+  "type": "module"
+}
