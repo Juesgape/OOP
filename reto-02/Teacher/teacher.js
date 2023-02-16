@@ -45,8 +45,8 @@ class Teacher extends Person {
                 const exam = new Exam(name, percentage, course, questions)
 
                 if(course.teacher === this) {
-                    exam.setQuestions = questions
-                    course.exams = exam
+                    exam.setQuestions(questions)
+                    course.exam(exam)
                 } else {
                     console.error(`El profesor ${this.name} no tiene asignado el curso ${course.name}`)
                 }

@@ -6,7 +6,7 @@ class Exam {
         this.questions = [] || questions
     }
 
-    set setQuestions(newQuestion) {
+    setQuestions(newQuestion) {
         return this.questions.push(newQuestion)
     }
 }

@@ -56,7 +56,7 @@ class Course {
         return this.exams
     }
 
-    set exam(newExam) {
+    exam(newExam) {
         this.exams.push(newExam)
     }
 

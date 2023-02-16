@@ -11,6 +11,8 @@ En esta aplicación se podrán crear cursos, estudiantes y profesores. Adicional
 //Cree la lógica para evaluar un parcial. En esta funcionalidad el profesor evaluará un curso con uno de los parciales previamente definido y se le asignará una nota de manera aleatoria a cada uno de los estudiantes del curso.
 //Cada curso tendrá un registro de notas con base en los parciales que se le hayan definido. Para esto, usarán un diccionario con la siguiente estructura
 
+// {id_estudiante_1:{"parcial_1": nota_1, "parcial_2: nota_2"}...}
+
 import { Student } from "./Student/student.js"
 import { Teacher } from "./Teacher/teacher.js"
 import { Course } from "./Course/course.js"
@@ -37,15 +39,16 @@ let course5 = new Course(215, 'English', teacher5)
 let e2 = new Student(112, 'Pepito', [course1, course4, course3, course5])
 
 
-//This should throw an error
-teacher5.setExam('To be verb', 120, course5, [{question: '¿To be === estar?', question: 'Hola ha ha'}])
+//This should throw an error when the percentage is too odd
+teacher5.setExam('To be verb', 100, course5, [{question: '¿To be === estar?', question: 'Hola ha ha'}])
+teacher5.setExam('Continuos present', 30, course5, [{question: 'Choose the right sentence', question: 'Imma go to the restroom'}])
 
 //this should throw an error
 /* teacher5.setExam('Test', 10, course1, [{question: 'blah blah', question: 'he he he'}]) */
 
 //testing the logic of the programm
 
-console.log(course5.exam);
+console.log(course5.exams);
 
 /* console.log(course5.exam); */
 
