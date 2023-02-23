@@ -57,6 +57,16 @@ class Teacher extends Person {
         }
 
     }
+
+    evaluateExam(course, examName) {
+        let courseExam = course.exams.find(elem => elem.name === examName)
+
+        if(courseExam?.name === examName) {
+            course.setGrades(courseExam.name, courseExam)
+        } else {
+            throw new Error('No se pudo encontrar el curso')
+        }
+    }
 }
 
 export {Teacher}

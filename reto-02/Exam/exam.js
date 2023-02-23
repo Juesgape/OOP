@@ -4,6 +4,7 @@ class Exam {
         this.percentage = percentage,
         this.course = course,
         this.questions = [] || questions
+        this.finished = false
     }
 
     setQuestions(newQuestion) {

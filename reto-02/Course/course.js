@@ -2,6 +2,37 @@
 //-------------------------------------------------------------------------------------------------------
 //Cuando se crea un curso, se debe definir el profesor que lo dicta.
 
+let gradesData
+
+const checkForID = (grades, studentID, exam, grade) => {
+    let found = false;
+    grades.forEach(elem => {
+        if (Object.keys(elem).toString() === studentID.toString()) {
+        elem[studentID][exam] = grade;
+        found = true;
+        }
+    });
+    return found;
+} 
+
+const isCourseOver = (exam) => {
+    let countingFinished = 0
+    let courseFinished = false
+
+    exam.forEach(elem => {
+        if(elem.finished === true) {
+            countingFinished += 1
+        }
+    })
+
+    if(countingFinished === exam.length) {
+        courseFinished = true
+        return courseFinished
+    } else {
+        return false
+    }
+}
+
 class Course {
     constructor(id, name, teacher, totalStudents) {
 
@@ -18,6 +49,7 @@ class Course {
             this.totalStudents = totalStudents || [];
             this.teacher = teacher
             this.exams = []
+            this.grades = []
     
             if (teacher) return teacher.addCourse = this
 
@@ -60,6 +92,35 @@ class Course {
         this.exams.push(newExam)
     }
 
+    setGrades(courseExamName, courseExam) {
+
+        this.totalStudents.forEach(student => {
+            let randomGrade = Math.random() * 5
+
+            let found = checkForID(this.grades, student.id, `Exam ${courseExamName}`, randomGrade);
+            if (!found) {
+                let elementToPush = {
+                    [student.id]: {
+                        [`Exam ${courseExamName}`]: randomGrade
+                    }
+                };
+            this.grades.push(elementToPush);
+            }
+        })
+        //function that sets the exam to be finished
+        courseExam.finished = true
+        
+        let CourseStatus = isCourseOver(this.exams)
+
+        if(CourseStatus === true) {
+            gradesData = this.grades
+            localStorage.setItem('GRADES_V1', JSON.stringify(gradesData))
+            localStorage.setItem('SUBJECT_NAME', JSON.stringify(this.name))
+            localStorage.setItem('STUDENTS_INFO', JSON.stringify(this.grades))
+        }
+        gradesData = localStorage.getItem('GRADES_V1')
+    }
 }
 
-export {Course}
+export {Course} 
+export {gradesData}
